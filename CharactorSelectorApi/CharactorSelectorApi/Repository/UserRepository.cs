@@ -12,8 +12,8 @@ namespace CharactorSelectorApi.Repository
     public class UserRepository : IUserRepository
     {
         private readonly ChracterSelectorContext _context;
-        private readonly IMapper _map;
         private readonly ILogger<UserRepository> _logger;
+        private readonly IMapper _map;
 
         public UserRepository(ChracterSelectorContext context, IMapper map, ILogger<UserRepository> logger)
         {
@@ -26,10 +26,7 @@ namespace CharactorSelectorApi.Repository
         {
             var entity = await _context.Users.FirstOrDefaultAsync(c => c.Id == id);
 
-            if (entity == null)
-            {
-                return null;
-            }
+            if (entity == null) return null;
 
             return _map.Map<User, UserDto>(entity);
         }

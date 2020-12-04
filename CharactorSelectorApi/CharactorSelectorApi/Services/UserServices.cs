@@ -16,7 +16,7 @@ namespace CharactorSelectorApi.Services
             _logger = logger;
             _repo = repo;
         }
-        
+
         public async Task<UserDto> GetUserById(Guid id)
         {
             return await _repo.GetUserById(id);

@@ -14,11 +14,8 @@ namespace CharactorSelectorApi.Models
             using var context = new ChracterSelectorContext(
                 serviceProvider.GetRequiredService<DbContextOptions<ChracterSelectorContext>>());
 
-            if (context.Characters.Any() && context.Options.Any())
-            {
-                return;
-            }
-            
+            if (context.Characters.Any() && context.Options.Any()) return;
+
             var characterId1 = Guid.NewGuid();
             var characterId2 = Guid.NewGuid();
             var characterId3 = Guid.NewGuid();
@@ -205,7 +202,7 @@ namespace CharactorSelectorApi.Models
                 DevSubOption5,
                 DevSubOption6
             );
-            
+
             context.SaveChanges();
         }
     }

@@ -6,14 +6,12 @@ namespace CharactorSelectorApi.Models.Dtos
 {
     public class OptionDto
     {
-        [Required] 
-        public Guid Id { get; set; }
-        
+        [Required] public Guid Id { get; set; }
+
         public Guid? ParentOptionId { get; set; }
-        
-        [Required] 
-        public Guid CharacterId { get; set; }
-        
+
+        [Required] public Guid CharacterId { get; set; }
+
         public OptionType Type { get; set; }
 
         [Required]

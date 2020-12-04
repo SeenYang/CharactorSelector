@@ -9,7 +9,7 @@ namespace CharactorSelectorApi.Models
             : base(options)
         {
         }
-        
+
         public virtual DbSet<Character> Characters { get; set; }
         public virtual DbSet<Option> Options { get; set; }
         public virtual DbSet<User> Users { get; set; }
@@ -21,15 +21,15 @@ namespace CharactorSelectorApi.Models
 
             modelBuilder.Entity<Option>()
                 .HasKey(o => o.Id);
-            
+
             modelBuilder.Entity<Option>()
                 .HasOne(o => o.Character)
                 .WithMany()
                 .HasForeignKey(o => o.CharacterId);
-            
+
             modelBuilder.Entity<User>()
                 .HasKey(u => u.Id);
-            
+
             base.OnModelCreating(modelBuilder);
         }
     }

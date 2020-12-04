@@ -26,7 +26,7 @@ namespace CharactorSelectorApi.Services
 
         public async Task<CharacterDto> GetCharacterById(Guid characterId)
         {
-            return await _repo.GetCharacterById(characterId, true);
+            return await _repo.GetCharacterById(characterId);
         }
 
         public async Task<CharacterDto> CreateCharacter(CharacterDto newCharacter)
@@ -41,7 +41,7 @@ namespace CharactorSelectorApi.Services
 
         public async Task<CharacterDto> UpdateCharacter(CharacterDto character)
         {
-            var existing = _repo.GetCharacterById(character.Id, includeOption: false);
+            var existing = _repo.GetCharacterById(character.Id, false);
 
             if (existing != null)
                 return await _repo.UpdateCharacter(character);
@@ -57,7 +57,7 @@ namespace CharactorSelectorApi.Services
 
         public async Task<OptionDto> CreateOption(OptionDto newOption)
         {
-            var character = await _repo.GetCharacterById(newOption.CharacterId, includeOption: false);
+            var character = await _repo.GetCharacterById(newOption.CharacterId, false);
             if (character == null)
             {
                 _logger.LogError($"Fail to create new Option: Character {newOption.CharacterId} can not be found.");
@@ -76,7 +76,7 @@ namespace CharactorSelectorApi.Services
 
         public async Task<OptionDto> UpdateOption(OptionDto option)
         {
-            var character = await _repo.GetCharacterById(option.CharacterId, includeOption: false);
+            var character = await _repo.GetCharacterById(option.CharacterId, false);
             if (character == null)
             {
                 _logger.LogError($"Fail to create new Option: Character {option.CharacterId} can not be found.");

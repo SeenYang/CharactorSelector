@@ -14,8 +14,8 @@ namespace CharactorSelectorApi.Repository
     public class CharacterRepository : ICharacterRepository
     {
         private readonly ChracterSelectorContext _context;
-        private readonly IMapper _map;
         private readonly ILogger<CharacterRepository> _logger;
+        private readonly IMapper _map;
 
         public CharacterRepository(ChracterSelectorContext context, IMapper map, ILogger<CharacterRepository> logger)
         {
@@ -25,7 +25,7 @@ namespace CharactorSelectorApi.Repository
         }
 
         /// <summary>
-        /// This method won't return characters' options
+        ///     This method won't return characters' options
         /// </summary>
         /// <returns></returns>
         public async Task<List<CharacterDto>> GetAllCharacters()
@@ -36,32 +36,26 @@ namespace CharactorSelectorApi.Repository
         }
 
         /// <summary>
-        ///  This method will return whole structure of the character's options
+        ///     This method will return whole structure of the character's options
         /// </summary>
         /// <returns></returns>
         public async Task<CharacterDto> GetCharacterById(Guid characterId, bool includeOption = true)
         {
             var entity = await _context.Characters.FirstOrDefaultAsync(c => c.Id == characterId);
 
-            if (entity == null)
-            {
-                return null;
-            }
+            if (entity == null) return null;
 
             var result = _map.Map<Character, CharacterDto>(entity);
             // TODO: Turn on automapper initialise dest when null.
             result.Options = new List<OptionDto>();
 
-            if (includeOption)
-            {
-                result.Options = await GetOptionsByCharacterId(result.Id);
-            }
+            if (includeOption) result.Options = await GetOptionsByCharacterId(result.Id);
             return result;
         }
 
         /// <summary>
-        /// This method only for validation the character's name exist or not.
-        /// Need to be extended if another requirement come in. 
+        ///     This method only for validation the character's name exist or not.
+        ///     Need to be extended if another requirement come in.
         /// </summary>
         /// <param name="name"></param>
         /// <returns>Character without options' hierarchy.</returns>
@@ -119,17 +113,14 @@ namespace CharactorSelectorApi.Repository
         {
             var entities = await _context.Options.Where(o => o.CharacterId == characterId).ToListAsync();
 
-            if (!entities.Any())
-            {
-                return new List<OptionDto>();
-            }
-            
+            if (!entities.Any()) return new List<OptionDto>();
+
             // Build hierarchy
             var topOptions = entities.Where(o => o.ParentOptionId == null).ToList();
             return topOptions.Select(option => BuildOptionDto(option.Id, entities)).ToList();
         }
 
-        
+
         public async Task<OptionDto> CreateOption(OptionDto newOption)
         {
             try
@@ -169,15 +160,12 @@ namespace CharactorSelectorApi.Repository
 
             return null;
         }
-        
-        
+
+
         private OptionDto BuildOptionDto(Guid Id, List<Option> options)
         {
             var currentOption = options.FirstOrDefault(o => o.Id == Id);
-            if (currentOption == null)
-            {
-                throw new Exception($"Can not find option {Id} from provided list.");
-            }
+            if (currentOption == null) throw new Exception($"Can not find option {Id} from provided list.");
 
             var dto = _map.Map<Option, OptionDto>(currentOption);
             // TODO: Turn on automapper initialise dest when null.
@@ -185,12 +173,8 @@ namespace CharactorSelectorApi.Repository
             var subOptions = options.Where(o => o.ParentOptionId == Id).ToList();
 
             if (subOptions.Any())
-            {
                 foreach (var subOption in subOptions)
-                {
                     dto.SubOptions.Add(BuildOptionDto(subOption.Id, options));
-                }
-            }
 
             return dto;
         }

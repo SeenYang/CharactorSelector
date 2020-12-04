@@ -11,6 +11,6 @@ namespace CharactorSelectorApi.Models.Entities
         public string Name { get; set; }
         public string Description { get; set; }
         public string ImgUrl { get; set; }
-        virtual public Character Character { get; set; }
+        public virtual Character Character { get; set; }
     }
 }
