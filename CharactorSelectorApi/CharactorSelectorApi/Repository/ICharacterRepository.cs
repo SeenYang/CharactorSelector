@@ -9,7 +9,7 @@ namespace CharactorSelectorApi.Repository
     {
         // Character
         Task<List<CharacterDto>> GetAllCharacters();
-        Task<CharacterDto> GetCharacterById(Guid characterId);
+        Task<CharacterDto> GetCharacterById(Guid characterId, bool includeOption = true);
         Task<CharacterDto> GetCharacterByName(string name);
         Task<CharacterDto> CreateCharacter(CharacterDto newCharacter);
         Task<CharacterDto> UpdateCharacter(CharacterDto character);

@@ -10,7 +10,9 @@ namespace CharactorSelectorApi.IoC
         public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<ICharacterRepository, CharacterRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICharacterServices, CharacterServices>();
+            services.AddScoped<IUserServices, UserServices>();
         }
     }
 }

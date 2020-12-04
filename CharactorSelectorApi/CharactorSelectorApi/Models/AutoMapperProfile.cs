@@ -11,8 +11,14 @@ namespace CharactorSelectorApi.Models
         /// </summary>
         public AutoMapperProfile()
         {
+            
+            
             CreateMap<Character, CharacterDto>();
+            CreateMap<CharacterDto, Character>();
             CreateMap<Option, OptionDto>();
+            CreateMap<OptionDto, Option>();
+            CreateMap<UserDto, User>();
+            CreateMap<User, UserDto>();
         }
     }
 }

@@ -4,7 +4,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:52662/swagger",
+      "applicationUrl": "http://localhost:52662",
       "sslPort": 44379
     }
   },
@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "SportLiveApi": {
+    "CharacterSelectorApi": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",

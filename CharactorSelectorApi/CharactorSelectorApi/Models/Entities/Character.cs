@@ -10,5 +10,6 @@ namespace CharactorSelectorApi.Models.Entities
         public string Description { get; set; }
         public string ImgUrl { get; set; }
         public int Type { get; set; }
+        public Guid? UserId { get; set; }
     }
 }

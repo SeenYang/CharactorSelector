@@ -12,6 +12,7 @@ namespace CharactorSelectorApi.Models
         
         public virtual DbSet<Character> Characters { get; set; }
         public virtual DbSet<Option> Options { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,6 +26,9 @@ namespace CharactorSelectorApi.Models
                 .HasOne(o => o.Character)
                 .WithMany()
                 .HasForeignKey(o => o.CharacterId);
+            
+            modelBuilder.Entity<User>()
+                .HasKey(u => u.Id);
             
             base.OnModelCreating(modelBuilder);
         }

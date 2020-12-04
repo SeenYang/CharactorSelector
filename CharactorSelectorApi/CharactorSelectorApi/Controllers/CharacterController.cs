@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using CharactorSelectorApi.Models.Dtos;
 using CharactorSelectorApi.Services;
@@ -45,8 +46,11 @@ namespace CharactorSelectorApi.Controllers
         {
             if (!ModelState.IsValid)
             {
-                // TODO: Get validation result message.
-                return BadRequest($"Invalid input. {ModelState}");
+                var errors = ModelState.Select(x => x.Value.Errors)
+                    .Where(y=>y.Count>0)
+                    .ToList();
+                _logger.LogError($"Invalid input. {errors}");
+                return BadRequest($"Invalid input. {errors}");
             }
 
             var result = await _services.CreateCharacter(newCharacter);
@@ -58,8 +62,11 @@ namespace CharactorSelectorApi.Controllers
         {
             if (!ModelState.IsValid)
             {
-                // TODO: Get validation result message.
-                return BadRequest($"Invalid input. {ModelState}");
+                var errors = ModelState.Select(x => x.Value.Errors)
+                    .Where(y=>y.Count>0)
+                    .ToList();
+                _logger.LogError($"Invalid input. {errors}");
+                return BadRequest($"Invalid input. {errors}");
             }
 
             var result = await _services.UpdateCharacter(character);
