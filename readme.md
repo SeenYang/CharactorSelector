@@ -50,3 +50,14 @@ creating new characters and customisations.
 Please do mention roughly how much time you took to complete the task. Once you are done, 
 please send the code files, the deployment files, etc in zip format with instructions on how 
 to run it and anything to watch out for or configure.
+
+------------------------------------------------------------------------------------------------
+TODO:
+-[x] Back-end design and first implementation. 2020-12-05
+-[] Back-end test.
+-[] Front-end scarffolding.
+-[] Hook up Back-end and Front-end.
+-[] Final test and clean up.
+-[] Documentation.
+
+
