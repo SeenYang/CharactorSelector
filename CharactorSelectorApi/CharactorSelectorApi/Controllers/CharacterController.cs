@@ -53,8 +53,13 @@ namespace CharactorSelectorApi.Controllers
             return result != null ? (IActionResult) Ok(result) : BadRequest("Fail to create character.");
         }
 
-        [HttpPost("UpdateCharacter")]
-        public async Task<IActionResult> UpdateCharacter([FromBody] CharacterDto character)
+        /// <summary>
+        /// This is the endpoint for adding customise character.
+        /// </summary>
+        /// <param name="newCustomise"></param>
+        /// <returns></returns>
+        [HttpPost("CreateCustomerCharacter")]
+        public async Task<IActionResult> CreateCustomerCharacter([FromBody] CustomiseCharacterDto newCustomise)
         {
             if (!ModelState.IsValid)
             {
@@ -65,8 +70,18 @@ namespace CharactorSelectorApi.Controllers
                 return BadRequest($"Invalid input. {errors}");
             }
 
-            var result = await _services.UpdateCharacter(character);
-            return result != null ? (IActionResult) Ok(result) : BadRequest("Fail to update character.");
+            var result = await _services.CreateCustomerCharacter(newCustomise);
+            return result != null ? (IActionResult) Ok(result) : BadRequest("Fail to create customise character.");
         }
+        
+        [HttpGet("GetCustomiseById/{customiseId}")]
+        public async Task<IActionResult> GetCustomiseById(Guid customiseId)
+        {
+            if (customiseId == Guid.Empty) return BadRequest("Invalid input characterId.");
+
+            var result = await _services.GetCustomiseById(customiseId);
+            return result != null ? (IActionResult) Ok(result) : NoContent();
+        }
+
     }
 }

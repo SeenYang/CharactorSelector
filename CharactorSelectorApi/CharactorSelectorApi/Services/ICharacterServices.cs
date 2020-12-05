@@ -11,11 +11,11 @@ namespace CharactorSelectorApi.Services
         Task<List<CharacterDto>> GetAllCharacters();
         Task<CharacterDto> GetCharacterById(Guid characterId);
         Task<CharacterDto> CreateCharacter(CharacterDto newCharacter);
-        Task<CharacterDto> UpdateCharacter(CharacterDto character);
+        Task<CustomiseCharacterDto> CreateCustomerCharacter(CustomiseCharacterDto newCustomise);
+        Task<CustomiseCharacterDto> GetCustomiseById(Guid customiseId);
 
         // Options
         Task<List<OptionDto>> GetOptionsByCharacterId(Guid characterId);
-        Task<OptionDto> CreateOption(OptionDto newOption);
         Task<OptionDto> UpdateOption(OptionDto option);
     }
 }

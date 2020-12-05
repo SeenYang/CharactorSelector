@@ -5,6 +5,7 @@ import {EMPTY, Observable, of} from 'rxjs';
 import {catchError, mapTo, tap} from 'rxjs/operators';
 import {Character} from '../Models/character';
 import {environment as testEnv} from '../../environments/environment';
+import {Customise} from "../Models/customise";
 
 @Injectable({providedIn: 'root'})
 export class CharacterService {
@@ -42,10 +43,10 @@ export class CharacterService {
     }
 
     /** POST: add a new hero to the server */
-    addCustomerCharacter(character: Character): Observable<Character> {
-        return this.http.post<Character>(`${this.CharacterUrl}/CreateCharacter/`, character).pipe(
+    addCustomerCharacter(customise: Customise): Observable<Character> {
+        return this.http.post<Character>(`${this.CharacterUrl}/CreateCustomerCharacter/`, customise).pipe(
             tap((newCharacter: Character) => {
-                console.log(`added event w/ id=${newCharacter.id}`);
+                console.log(`added new Customise Character. w/ id=${newCharacter.id}`);
                 return newCharacter;
             }),
             catchError((error) => {

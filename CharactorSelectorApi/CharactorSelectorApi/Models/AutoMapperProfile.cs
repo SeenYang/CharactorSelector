@@ -17,6 +17,8 @@ namespace CharactorSelectorApi.Models
             CreateMap<OptionDto, Option>();
             CreateMap<UserDto, User>();
             CreateMap<User, UserDto>();
+            CreateMap<CustomiseCharacterDto, CustomiseCharacter>();
+            CreateMap<CustomiseCharacter, CustomiseCharacterDto>();
         }
     }
 }

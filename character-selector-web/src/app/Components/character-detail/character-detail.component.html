@@ -2,24 +2,47 @@
     <div>Name: {{character.name}}</div>
     <div>Description: {{character.description}}</div>
     <div>ID: {{character.id}}</div>
-    <div *ngIf="character.options">
-        <div>Options</div>
+    <div>
+        <h4>Character Name</h4>
+        <label>
+            <input #characterName
+                   placeholder="Please put the customise character name."
+                   [(ngModel)]="customiseName">
+        </label>
+    </div>
+    <button (click)="reset()">Reset</button>
+    <button (click)="back()">Back</button>
+    <button (click)="save()">Save</button>
+
+    <div class="option-container">
+        <h4>Options</h4>
         <ol>
-            <li *ngFor="let option of character.options">
-                <div>{{option.name}}</div>
-                <div *ngIf="option.subOptions">
-                    <div>SubOptions</div>
-                    <ol>
-                        <li *ngFor="let subOption of option.subOptions">
-                            <div (click)="selectSuboption(subOption)"
-                                 [ngClass]="{'is-selected':customiseCharacter.selectedOptions.indexOf(subOption.id) !== -1}">
-                                {{subOption.name}}
-                            </div>
-                        </li>
-                    </ol>
+            <li *ngFor="let option of options">
+                <div (click)="selectOption(option)"
+                     [ngClass]="{'is-selected':customiseCharacter.selectedOptions.indexOf(option.id) !== -1}">
+                    {{option.name}}
                 </div>
             </li>
         </ol>
     </div>
+
+    <div class="sub-option-container">
+        <h4>Sub-Options</h4>
+        <ol *ngIf="suboptions else emptySuboption">
+            <li *ngFor="let option of suboptions">
+                <div (click)="selectSuboption(option)"
+                     [ngClass]="{'is-selected':customiseCharacter.selectedOptions.indexOf(option.id) !== -1}">
+                    {{option.name}}
+                </div>
+            </li>
+        </ol>
+        <ng-template #emptySuboption>
+            <ol>
+                <li>Please select one of the option(s).</li>
+            </ol>
+        </ng-template>
+    </div>
+
+
 </div>
 

@@ -31,47 +31,98 @@ namespace CharactorSelectorApi.Services
 
         public async Task<CharacterDto> CreateCharacter(CharacterDto newCharacter)
         {
-            var existing = _repo.GetCharacterByName(newCharacter.Name);
-
+            var existing = await _repo.GetCharacterByName(newCharacter.Name);
             if (existing == null)
-                return await _repo.CreateCharacter(newCharacter);
+            {
+                var created = await _repo.CreateCharacter(newCharacter);
+                if (newCharacter.Options.Any())
+                {
+                    var flatted = InitiateNewOptionList(newCharacter.Options, created.Id);
+                    var result = await _repo.CreateOptions(flatted);
+                    if (result)
+                    {
+                        var returnResult = await _repo.GetCharacterById(created.Id, true);
+                        return returnResult;
+                    }
+                }
+            }
+
             _logger.LogError("Invalid new character: Name exist.");
             return null;
         }
 
-        public async Task<CharacterDto> UpdateCharacter(CharacterDto character)
+        public async Task<CustomiseCharacterDto> CreateCustomerCharacter(CustomiseCharacterDto newCustomise)
         {
-            var existing = _repo.GetCharacterById(character.Id, false);
+            var created = await _repo.CreateCustomise(newCustomise);
+            return created;
+        }
 
-            if (existing != null)
-                return await _repo.UpdateCharacter(character);
+        public async Task<CustomiseCharacterDto> GetCustomiseById(Guid customiseId)
+        {
+            return await _repo.GetCustomiseById(customiseId);
+        }
 
-            _logger.LogError($"Fail to update character: Can not find character: {character.Id}.");
-            return null;
+        /// <summary>
+        /// Taking structured option list, initiate the ids.
+        /// </summary>
+        /// <param name="options">Structured Option list</param>
+        /// <param name="characterId"></param>
+        /// <returns></returns>
+        private List<OptionDto> InitiateNewOptionList(List<OptionDto> options, Guid characterId)
+        {
+            var returnList = new List<OptionDto>();
+            foreach (var option in options)
+            {
+                var optionId = Guid.NewGuid();
+                option.Id = optionId;
+                option.CharacterId = characterId;
+                returnList.Add(option);
+                if (option.SubOptions.Any())
+                {
+                    returnList.AddRange(InitiateSubOptions(option.SubOptions, optionId, characterId));
+                }
+            }
+
+            return returnList;
+        }
+
+        private List<OptionDto> InitiateSubOptions(List<OptionDto> subOptions, Guid parentId, Guid characterId)
+        {
+            var returnList = new List<OptionDto>();
+            foreach (var option in subOptions)
+            {
+                var optionId = Guid.NewGuid();
+                option.Id = optionId;
+                option.ParentOptionId = parentId;
+                option.CharacterId = characterId;
+                if (option.SubOptions.Any())
+                {
+                    returnList.AddRange(InitiateSubOptions(option.SubOptions, optionId, characterId));
+                }
+            }
+
+            returnList.AddRange(subOptions);
+            return returnList;
+        }
+
+
+        private List<OptionDto> FlattenOptionList(OptionDto option, List<OptionDto> returnList)
+        {
+            if (option.SubOptions.Any())
+            {
+                foreach (var subOption in option.SubOptions)
+                {
+                    returnList.AddRange(FlattenOptionList(subOption, returnList));
+                }
+            }
+
+            returnList.Add(option);
+            return returnList;
         }
 
         public async Task<List<OptionDto>> GetOptionsByCharacterId(Guid characterId)
         {
             return await _repo.GetOptionsByCharacterId(characterId);
-        }
-
-        public async Task<OptionDto> CreateOption(OptionDto newOption)
-        {
-            var character = await _repo.GetCharacterById(newOption.CharacterId, false);
-            if (character == null)
-            {
-                _logger.LogError($"Fail to create new Option: Character {newOption.CharacterId} can not be found.");
-                return null;
-            }
-
-            if (character.Options.Any(o =>
-                string.Equals(o.Name, newOption.Name, StringComparison.InvariantCultureIgnoreCase)))
-            {
-                _logger.LogError($"Fail to create new Option: Option name {newOption.Name} exist.");
-                return null;
-            }
-
-            return await _repo.CreateOption(newOption);
         }
 
         public async Task<OptionDto> UpdateOption(OptionDto option)
