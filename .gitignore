@@ -7,3 +7,4 @@ character-selector-web/.idea/
 character-selector-web/node_modules/**
 CharactorSelectorApi/CharactorSelectorApi/C:/**
 character-selector-web/dist/**
+CharactorSelectorApi/CharacterSelectorApi.Tests/obj/
