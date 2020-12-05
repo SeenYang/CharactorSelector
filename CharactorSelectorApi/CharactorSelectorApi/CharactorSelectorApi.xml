@@ -11,6 +11,11 @@
             <param name="newCustomise"></param>
             <returns></returns>
         </member>
+        <member name="T:CharactorSelectorApi.Filters.ValidateCharacterAttribute">
+            <summary>
+            Here is the sample filter that could do overriding modal validation, authorization/authentication validation, etc.
+            </summary>
+        </member>
         <member name="M:CharactorSelectorApi.Models.AutoMapperProfile.#ctor">
             <summary>
                 Add mapping config under this file.
@@ -52,12 +57,67 @@
             <param name="newCustomise"></param>
             <returns></returns>
         </member>
+        <member name="M:CharactorSelectorApi.Services.CharacterServices.GetAllCharacters">
+            <summary>
+            Get All Characters
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CharactorSelectorApi.Services.CharacterServices.GetCharacterById(System.Guid)">
+            <summary>
+            Get Character By Id
+            </summary>
+            <param name="characterId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CharactorSelectorApi.Services.CharacterServices.CreateCharacter(CharactorSelectorApi.Models.Dtos.CharacterDto)">
+            <summary>
+            input character should be structured options.
+            The hierarchy will be flatten and saved.
+            </summary>
+            <param name="newCharacter">CharacterDto with structure options.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CharactorSelectorApi.Services.CharacterServices.CreateCustomerCharacter(CharactorSelectorApi.Models.Dtos.CustomiseCharacterDto)">
+            <summary>
+            Create Customer Character
+            </summary>
+            <param name="newCustomise"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CharactorSelectorApi.Services.CharacterServices.GetCustomiseById(System.Guid)">
+            <summary>
+            Get Customise By Id
+            </summary>
+            <param name="customiseId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CharactorSelectorApi.Services.CharacterServices.GetAllCustomises">
+            <summary>
+            Get All Customises
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CharactorSelectorApi.Services.CharacterServices.InitiateNewOptionList(System.Collections.Generic.List{CharactorSelectorApi.Models.Dtos.OptionDto},System.Guid)">
             <summary>
             Taking structured option list, initiate the ids.
             </summary>
             <param name="options">Structured Option list</param>
             <param name="characterId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CharactorSelectorApi.Services.CharacterServices.GetOptionsByCharacterId(System.Guid)">
+            <summary>
+            Get Options By CharacterId
+            </summary>
+            <param name="characterId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CharactorSelectorApi.Services.CharacterServices.UpdateOption(CharactorSelectorApi.Models.Dtos.OptionDto)">
+            <summary>
+            Update Option
+            </summary>
+            <param name="option"></param>
             <returns></returns>
         </member>
     </members>

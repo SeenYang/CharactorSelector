@@ -27,7 +27,7 @@ namespace CharactorSelectorApi.Controllers
             if (userId == Guid.Empty)
             {
                 _logger.LogError($"Invalid Input userId: {userId}");
-                return BadRequest("Invalid input characterId.");
+                return BadRequest("Invalid input userId.");
             }
 
             var result = await _services.GetUserById(userId);

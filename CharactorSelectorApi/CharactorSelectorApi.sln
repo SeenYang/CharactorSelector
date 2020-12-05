@@ -1,6 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CharactorSelectorApi", "CharactorSelectorApi\CharactorSelectorApi.csproj", "{1AC3E9DB-A856-43B0-A392-985CBF1AF935}"
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30711.63
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CharactorSelectorApi", "CharactorSelectorApi\CharactorSelectorApi.csproj", "{1AC3E9DB-A856-43B0-A392-985CBF1AF935}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CharacterSelectorApi.Tests", "CharacterSelectorApi.Tests\CharacterSelectorApi.Tests.csproj", "{2C4A082D-C72F-4F2B-A9BA-86C325C13446}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +17,15 @@ Global
 		{1AC3E9DB-A856-43B0-A392-985CBF1AF935}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AC3E9DB-A856-43B0-A392-985CBF1AF935}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AC3E9DB-A856-43B0-A392-985CBF1AF935}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C4A082D-C72F-4F2B-A9BA-86C325C13446}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C4A082D-C72F-4F2B-A9BA-86C325C13446}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C4A082D-C72F-4F2B-A9BA-86C325C13446}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C4A082D-C72F-4F2B-A9BA-86C325C13446}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C8FEFAA5-440E-4D4E-AD68-BA5BB50ACC13}
 	EndGlobalSection
 EndGlobal

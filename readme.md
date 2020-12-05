@@ -54,10 +54,10 @@ to run it and anything to watch out for or configure.
 ------------------------------------------------------------------------------------------------
 TODO:
 - [x] Back-end design and first implementation. 2020-12-05
-- [ ] Back-end test.
+- [x] Back-end test. 2020-12-06
 - [x] Front-end scarffolding. 2020-12-06
 - [x] Hook up Back-end and Front-end. 2020-12-06
-- [x] Front-end UI Kit apply.
+- [x] Front-end UI Kit apply. 2020-12-06
 - [x] Final test and clean up.
 - [ ] Documentation.
 
