@@ -1,5 +1,4 @@
-
-export interface Customise{
+export interface Customise {
     id: string;
     name: string;
     selectedOptions: string[];

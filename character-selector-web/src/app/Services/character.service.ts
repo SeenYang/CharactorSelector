@@ -20,7 +20,6 @@ export class CharacterService {
         private messageService: MessageService) {
     }
 
-    /** GET heroes from the server */
     getCharacters(): Observable<Character[]> {
         return this.http.get<Character[]>(`${this.CharacterUrl}/GetAllCharacters/`)
             .pipe(
@@ -29,14 +28,33 @@ export class CharacterService {
             );
     }
 
-    /* GET heroes whose name contains search term */
+    getAllCustomises(): Observable<Customise[]> {
+        return this.http.get<Customise[]>(`${this.CharacterUrl}/GetAllCustomise/`)
+            .pipe(
+                tap(_ => this.log('Fetch Characters')),
+                catchError(this.handleError<Customise[]>('getAllCustomise', []))
+            );
+    }
+
+    getCustomiseById(customiseId: string): Observable<Customise> {
+        return this.http.get<Customise>(`${this.CharacterUrl}/GetCustomiseById/${customiseId}`).pipe(
+            tap((x) => {
+                this.log(`found Customise matching "${customiseId}"`);
+            }),
+            catchError((error) => {
+                this.handleError<Customise>('getCustomiseById', {} as Customise);
+                return EMPTY;
+            })
+        );
+    }
+
     getCharactersById(characterId: string): Observable<Character> {
         return this.http.get<Character>(`${this.CharacterUrl}/GetCharacterById/${characterId}`).pipe(
             tap((x) => {
                 this.log(`found Characters matching "${characterId}"`);
             }),
             catchError((error) => {
-                this.handleError<Character>('getCharactersById', error);
+                this.handleError<Character>('getCharactersById', {} as Character);
                 return EMPTY;
             })
         );
@@ -50,7 +68,7 @@ export class CharacterService {
                 return newCharacter;
             }),
             catchError((error) => {
-                this.handleError(error);
+                this.log('Fail to add customise. ' + error.message);
                 return EMPTY;
             })
         );
@@ -78,6 +96,6 @@ export class CharacterService {
 
     /** Log a CharacterService message with the MessageService */
     private log(message: string) {
-        this.messageService.add(`HeroService: ${message}`);
+        this.messageService.add(`CharacterServices: ${message}`);
     }
 }

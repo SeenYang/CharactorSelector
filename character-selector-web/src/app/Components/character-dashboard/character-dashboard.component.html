@@ -1,9 +1,21 @@
-<p>character-dashboard works!</p>
-
-<div *ngIf="characters">
+<div class="nes-container is-dark with-title" *ngIf="characters">
+    <p class="title">Character Templates</p>
     <ol>
         <li *ngFor="let character of characters">
-            <a routerLink="/character/{{character.id}}">{{character.name}} - {{character.description}}</a>
+            <a class="col-l-4" routerLink="/character/{{character.id}}">
+                <div>{{character.name}} - {{character.description}}</div>
+            </a>
+        </li>
+    </ol>
+</div>
+
+<div class="nes-container is-dark with-title" *ngIf="characters">
+    <p class="title">Customise Characters</p>
+    <ol>
+        <li *ngFor="let customise of customises">
+            <a class="col-l-4" routerLink="/customise/{{customise.id}}">
+                <div>Customise: {{customise.name}} - By: {{customise.userId}}</div>
+            </a>
         </li>
     </ol>
 </div>

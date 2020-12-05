@@ -1,0 +1,12 @@
+<div *ngIf="customise" class="nes-container">
+    <div class="nes-container  is-dark with-title">
+        <p class="title">CharacterBasic information</p>
+        <div>Name: {{customise.name}}</div>
+        <div>Description: {{customise.userId}}</div>
+        <div>ID: {{customise.id}}</div>
+
+        <div class="btn-group">
+            <button class="nes-btn is-error" (click)="back()">Back</button>
+        </div>
+    </div>
+</div>

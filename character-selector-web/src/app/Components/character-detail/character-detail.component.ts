@@ -2,12 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {Option} from '../../Models/option';
-import {OptionService} from '../../Services/option.service';
 import {v4 as guid} from 'uuid';
 import {MessageService} from '../../Services/message.service';
 import {CharacterService} from '../../Services/character.service';
 import {Character} from '../../Models/character';
 import {Customise} from '../../Models/customise';
+import {Observable, of} from "rxjs";
 
 @Component({
     selector: 'app-character-detail',
@@ -19,22 +19,21 @@ export class CharacterDetailComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private characterService: CharacterService,
-        private optionService: OptionService,
         private messageService: MessageService,
         private location: Location
     ) {
     }
 
-    customiseCharacter: Customise;
     characterId: string;
     character: Character;
-
     options: Option[];
     suboptions: Option[];
+    customiseCharacter: Customise;
 
     selectedOption: Option;
+    selectedOptions = [];
     selectedSubOption: Option;
-    customiseName: string;
+    customiseName = '';
 
     ngOnInit(): void {
         this.characterId = this.route.snapshot.paramMap.get('id');
@@ -63,24 +62,24 @@ export class CharacterDetailComponent implements OnInit {
         this.customiseCharacter.name = this.customiseName;
         this.characterService.addCustomerCharacter(this.customiseCharacter)
             .subscribe((result) => {
-                console.log(result);
-                this.messageService.add(msgPrefix + `New character ${result}`);
-                // todo: redirect to new character page.
+                this.messageService.add(msgPrefix + `New character "${result.name}" created. id: ${result.id}.`);
+                this.back();
             });
     }
 
     selectOption(option: Option) {
-        this.selectedOption = option;
-        this.suboptions = option.subOptions;
-        this.highlightSelection(option);
+        // Reset Suboption container if none of Option selected.
+        if (this.selectedOption === option) {
+            this.selectedOption = null;
+            this.suboptions = null;
+        } else {
+            this.selectedOption = option;
+            this.suboptions = option.subOptions;
+        }
     }
 
     selectSuboption(option: Option) {
         this.selectedSubOption = option;
-        this.highlightSelection(option);
-    }
-
-    highlightSelection(option: Option) {
         if (this.customiseCharacter.selectedOptions.indexOf(option.id) !== -1) {
             this.customiseCharacter.selectedOptions = this.customiseCharacter.selectedOptions.filter(c => c !== option.id);
             this.messageService.add(`Un-Selected Option ${option.name}`);
@@ -102,4 +101,7 @@ export class CharacterDetailComponent implements OnInit {
         this.location.back();
     }
 
+    disableSave(): boolean {
+        return !this.customiseName && this.customiseName.trim() !== '';
+    }
 }

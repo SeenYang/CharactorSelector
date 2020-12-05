@@ -1,48 +1,61 @@
-<div *ngIf="character">
-    <div>Name: {{character.name}}</div>
-    <div>Description: {{character.description}}</div>
-    <div>ID: {{character.id}}</div>
-    <div>
-        <h4>Character Name</h4>
-        <label>
-            <input #characterName
-                   placeholder="Please put the customise character name."
-                   [(ngModel)]="customiseName">
-        </label>
-    </div>
-    <button (click)="reset()">Reset</button>
-    <button (click)="back()">Back</button>
-    <button (click)="save()">Save</button>
+<div *ngIf="character" class="nes-container">
+    <div class="nes-container  is-dark with-title">
+        <p class="title">CharacterBasic information</p>
+        <div>Name: {{character.name}}</div>
+        <div>Description: {{character.description}}</div>
+        <div>ID: {{character.id}}</div>
 
-    <div class="option-container">
+        <div class="btn-group">
+            <button class="nes-btn is-error" (click)="back()">Back</button>
+        </div>
+    </div>
+
+
+    <div class="option-container nes-container with-title">
+        <p class="title">Customise</p>
+        <div id="nameInput">
+            <p class="title">Customise Character Name</p>
+            <div class="nes-field">
+                <input #characterName
+                       id="characterName"
+                       class="nes-input"
+                       placeholder="Please put the customise character name."
+                       [(ngModel)]="customiseName">
+            </div>
+        </div>
         <h4>Options</h4>
         <ol>
             <li *ngFor="let option of options">
                 <div (click)="selectOption(option)"
-                     [ngClass]="{'is-selected':customiseCharacter.selectedOptions.indexOf(option.id) !== -1}">
+                     [ngClass]="{'is-option-selected':selectedOption === option}">
                     {{option.name}}
                 </div>
             </li>
         </ol>
-    </div>
-
-    <div class="sub-option-container">
-        <h4>Sub-Options</h4>
-        <ol *ngIf="suboptions else emptySuboption">
-            <li *ngFor="let option of suboptions">
-                <div (click)="selectSuboption(option)"
-                     [ngClass]="{'is-selected':customiseCharacter.selectedOptions.indexOf(option.id) !== -1}">
-                    {{option.name}}
-                </div>
-            </li>
-        </ol>
-        <ng-template #emptySuboption>
-            <ol>
-                <li>Please select one of the option(s).</li>
+        <div class="sub-option-container">
+            <h4>Sub-Options</h4>
+            <ol *ngIf="suboptions else emptySuboption">
+                <li *ngFor="let option of suboptions">
+                    <div (click)="selectSuboption(option)"
+                         [ngClass]="{'is-selected':customiseCharacter.selectedOptions.indexOf(option.id) !== -1}">
+                        {{option.name}}
+                    </div>
+                </li>
             </ol>
-        </ng-template>
+            <ng-template #emptySuboption>
+                <ol>
+                    <li class="is-disabled">Please select one of the options.</li>
+                </ol>
+            </ng-template>
+        </div>
+        <div class="btn-group">
+            <button class="nes-btn" (click)="reset()">Reset</button>
+            <button class="nes-btn is-primary "
+                    [ngClass]="{'is-disabled': customiseName.trim() == ''}"
+                    (click)="save()">Save
+            </button>
+        </div>
     </div>
-
 
 </div>
 

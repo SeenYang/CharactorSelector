@@ -3,7 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {CharacterService} from '../../Services/character.service';
 import {OptionService} from '../../Services/option.service';
 import {Character} from '../../Models/character';
-import {tap} from "rxjs/operators";
+import {Customise} from '../../Models/customise';
 
 @Component({
     selector: 'app-character-dashboard',
@@ -15,12 +15,11 @@ export class CharacterDashboardComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private characterService: CharacterService,
-        private optionService: OptionService
     ) {
     }
 
     characters: Character[];
-    CustomerCharacter: Character[];
+    customises: Customise[];
 
 
     ngOnInit(): void {
@@ -36,9 +35,9 @@ export class CharacterDashboardComponent implements OnInit {
     }
 
     getCustomiseCharacters() {
-        // this.characterService.getCustomiseCharacters()
-        //     .subscribe((result) => {
-        //         this.characters = result;
-        //     });
+        this.characterService.getAllCustomises()
+            .subscribe((result) => {
+                this.customises = result;
+            });
     }
 }

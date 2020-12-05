@@ -57,7 +57,7 @@ TODO:
 - [ ] Back-end test.
 - [x] Front-end scarffolding. 2020-12-06
 - [x] Hook up Back-end and Front-end. 2020-12-06
-- [ ] Front-end UI Kit apply.
+- [x] Front-end UI Kit apply.
 - [ ] Final test and clean up.
 - [ ] Documentation.
 

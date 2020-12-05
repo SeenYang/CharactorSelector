@@ -13,6 +13,7 @@ namespace CharactorSelectorApi.Services
         Task<CharacterDto> CreateCharacter(CharacterDto newCharacter);
         Task<CustomiseCharacterDto> CreateCustomerCharacter(CustomiseCharacterDto newCustomise);
         Task<CustomiseCharacterDto> GetCustomiseById(Guid customiseId);
+        Task<List<CustomiseCharacterDto>> GetAllCustomises();
 
         // Options
         Task<List<OptionDto>> GetOptionsByCharacterId(Guid characterId);

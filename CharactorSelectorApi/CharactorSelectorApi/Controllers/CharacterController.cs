@@ -82,6 +82,13 @@ namespace CharactorSelectorApi.Controllers
             var result = await _services.GetCustomiseById(customiseId);
             return result != null ? (IActionResult) Ok(result) : NoContent();
         }
+        
+        [HttpGet("GetAllCustomise")]
+        public async Task<IActionResult> GetAllCustomise()
+        {
+            var result = await _services.GetAllCustomises();
+            return result != null ? (IActionResult) Ok(result) : NoContent();
+        }
 
     }
 }

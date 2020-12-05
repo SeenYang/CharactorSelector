@@ -61,6 +61,11 @@ namespace CharactorSelectorApi.Services
         {
             return await _repo.GetCustomiseById(customiseId);
         }
+        
+        public async Task<List<CustomiseCharacterDto>> GetAllCustomises()
+        {
+            return await _repo.GetAllCustomise();
+        }
 
         /// <summary>
         /// Taking structured option list, initiate the ids.

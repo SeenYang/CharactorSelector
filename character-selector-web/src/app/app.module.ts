@@ -8,6 +8,7 @@ import {MessagesComponent} from './Components/messages/messages.component';
 import {ENV, getEnv} from '../environments/environment.provider';
 import {CharacterDetailComponent} from './Components/character-detail/character-detail.component';
 import {CharacterDashboardComponent} from './Components/character-dashboard/character-dashboard.component';
+import { CustomiseDetailComponent } from './Components/customise-detail/customise-detail.component';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import {CharacterDashboardComponent} from './Components/character-dashboard/char
     AppComponent,
     CharacterDetailComponent,
     MessagesComponent,
-    CharacterDashboardComponent
+    CharacterDashboardComponent,
+    CustomiseDetailComponent
   ],
   bootstrap: [AppComponent]
 })
