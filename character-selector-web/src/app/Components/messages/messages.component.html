@@ -1,0 +1,5 @@
+<h2>Event History</h2>
+<button class="nes-btn is-error" (click)="messageService.clear()">clear</button>
+<div *ngIf="messageService.messages.length">
+  <div *ngFor='let message of messageService.messages'> {{message}} </div>
+</div>

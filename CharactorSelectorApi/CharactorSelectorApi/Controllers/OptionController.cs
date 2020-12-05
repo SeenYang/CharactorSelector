@@ -23,7 +23,7 @@ namespace CharactorSelectorApi.Controllers
         }
 
         [HttpGet("GetOptionsByCharacterId/{characterId}")]
-        public async Task<IActionResult> GetAllCharacters(Guid characterId)
+        public async Task<IActionResult> GetOptionsByCharacterId(Guid characterId)
         {
             if (characterId == Guid.Empty) return BadRequest("Invalid input characterId.");
             var result = await _services.GetOptionsByCharacterId(characterId);

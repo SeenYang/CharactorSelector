@@ -1,3 +1,7 @@
 CharactorSelectorApi/.idea/
 CharactorSelectorApi/CharactorSelectorApi/obj/
 CharactorSelectorApi/CharactorSelectorApi/bin/
+.DS_Store
+character-selector-web/.idea/**
+character-selector-web/.idea/
+character-selector-web/node_modules/**

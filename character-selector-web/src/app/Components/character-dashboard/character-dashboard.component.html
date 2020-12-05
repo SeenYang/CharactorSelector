@@ -1,0 +1,9 @@
+<p>character-dashboard works!</p>
+
+<div *ngIf="characters">
+    <ol>
+        <li *ngFor="let character of characters">
+            <a routerLink="/character/{{character.id}}">{{character.name}} - {{character.description}}</a>
+        </li>
+    </ol>
+</div>

@@ -1,0 +1,25 @@
+<div *ngIf="character">
+    <div>Name: {{character.name}}</div>
+    <div>Description: {{character.description}}</div>
+    <div>ID: {{character.id}}</div>
+    <div *ngIf="character.options">
+        <div>Options</div>
+        <ol>
+            <li *ngFor="let option of character.options">
+                <div>{{option.name}}</div>
+                <div *ngIf="option.subOptions">
+                    <div>SubOptions</div>
+                    <ol>
+                        <li *ngFor="let subOption of option.subOptions">
+                            <div (click)="selectSuboption(subOption)"
+                                 [ngClass]="{'is-selected':customiseCharacter.selectedOptions.indexOf(subOption.id) !== -1}">
+                                {{subOption.name}}
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </li>
+        </ol>
+    </div>
+</div>
+
