@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using CharactorSelectorApi.Filters;
 using CharactorSelectorApi.Models.Dtos;
 using CharactorSelectorApi.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -38,6 +39,7 @@ namespace CharactorSelectorApi.Controllers
         }
 
         [HttpPost("CreateCharacter")]
+        [ValidateCharacter]
         public async Task<IActionResult> CreateCharacter([FromBody] CharacterDto newCharacter)
         {
             if (!ModelState.IsValid)

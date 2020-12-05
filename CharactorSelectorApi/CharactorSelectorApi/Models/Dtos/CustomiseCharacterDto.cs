@@ -12,7 +12,7 @@ namespace CharactorSelectorApi.Models.Dtos
         [Required]
         public Guid Id { get; set; }
         [Required]
-        [StringLength(256, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 2)]
+        [StringLength(255, ErrorMessage = "{0} length must be between {2} and {1}.", MinimumLength = 2)]
         public string Name { get; set; }
         [Required]
         public Guid UserId { get; set; }

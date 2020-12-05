@@ -58,7 +58,11 @@ TODO:
 - [x] Front-end scarffolding. 2020-12-06
 - [x] Hook up Back-end and Front-end. 2020-12-06
 - [x] Front-end UI Kit apply.
-- [ ] Final test and clean up.
+- [x] Final test and clean up.
 - [ ] Documentation.
+
+Plan to do:
+- [ ] DB access lock inquiry;
+
 
 
