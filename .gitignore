@@ -8,3 +8,4 @@ character-selector-web/node_modules/**
 CharactorSelectorApi/CharactorSelectorApi/C:/**
 character-selector-web/dist/**
 CharactorSelectorApi/CharacterSelectorApi.Tests/obj/
+CharactorSelectorApi/CharacterSelectorApi.Tests/bin/
