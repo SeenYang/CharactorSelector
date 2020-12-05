@@ -21,21 +21,6 @@ export class OptionService {
         }
     }
 
-    getEventsByGameId(characterId: string): Observable<Option[]> {
-        return this.http.get<Option[]>(`${this.optionUrl}/GetOptionsByCharacterId/${characterId}`)
-            .pipe(
-                tap((options) => {
-                    console.log(options);
-                    console.log(`fetched options for character ${characterId}`);
-                    return options;
-                }),
-                catchError((error) => {
-                    this.handleError<Option[]>('get option by character Id', error);
-                    return EMPTY;
-                })
-            );
-    }
-
     /**
      * Handle Http operation that failed.
      * Let the app continue.

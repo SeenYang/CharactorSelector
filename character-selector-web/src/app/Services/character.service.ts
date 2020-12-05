@@ -60,7 +60,6 @@ export class CharacterService {
         );
     }
 
-    /** POST: add a new hero to the server */
     addCustomerCharacter(customise: Customise): Observable<Character> {
         return this.http.post<Character>(`${this.CharacterUrl}/CreateCustomerCharacter/`, customise).pipe(
             tap((newCharacter: Character) => {
