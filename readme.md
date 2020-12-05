@@ -55,8 +55,9 @@ to run it and anything to watch out for or configure.
 TODO:
 - [x] Back-end design and first implementation. 2020-12-05
 - [ ] Back-end test.
-- [x] Front-end scarffolding.
-- [x] Hook up Back-end and Front-end.
+- [x] Front-end scarffolding. 2020-12-06
+- [x] Hook up Back-end and Front-end. 2020-12-06
+- [ ] Front-end UI Kit apply.
 - [ ] Final test and clean up.
 - [ ] Documentation.
 
