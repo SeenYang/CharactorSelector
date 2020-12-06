@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CharactorSelectorApi.Models.Dtos;
@@ -10,6 +9,9 @@ using Microsoft.Extensions.Logging;
 
 namespace CharactorSelectorApi.Controllers
 {
+    /// <summary>
+    /// CustomiseController
+    /// </summary>
     [ApiController]
     [Route("api/[controller]s")]
     public class CustomiseController : ControllerBase
@@ -17,6 +19,11 @@ namespace CharactorSelectorApi.Controllers
         private readonly ILogger<CustomiseController> _logger;
         private readonly ICustomiseService _service;
 
+        /// <summary>
+        /// CustomiseController
+        /// </summary>
+        /// <param name="logger"></param>
+        /// <param name="service"></param>
         public CustomiseController(ILogger<CustomiseController> logger, ICustomiseService service)
         {
             _logger = logger;
@@ -44,6 +51,11 @@ namespace CharactorSelectorApi.Controllers
             return result != null ? (IActionResult) Ok(result) : BadRequest("Fail to create customise character.");
         }
 
+        /// <summary>
+        /// Get Customise By Id
+        /// </summary>
+        /// <param name="customiseId"></param>
+        /// <returns></returns>
         [HttpGet("GetCustomiseById/{customiseId}")]
         public async Task<IActionResult> GetCustomiseById(Guid customiseId)
         {

@@ -16,6 +16,7 @@ namespace CharactorSelectorApi.Models.Dtos
         public string Name { get; set; }
 
         [Required] public Guid UserId { get; set; }
+        public string UserName { get; set; }
 
         public List<Guid> SelectedOptions { get; set; }
 

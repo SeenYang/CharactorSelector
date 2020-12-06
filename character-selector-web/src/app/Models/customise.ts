@@ -3,5 +3,6 @@ export interface Customise {
     name: string;
     selectedOptions: string[];
     userId: string;
+    userName: string;
     characterId: string;
 }

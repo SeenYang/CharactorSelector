@@ -2,7 +2,7 @@
     <div class="nes-container  is-dark with-title">
         <p class="title">CharacterBasic information</p>
         <div>Name: {{customise.name}}</div>
-        <div>Description: {{customise.userId}}</div>
+        <div>User: {{customise.userName === '' ? 'Guest' : customise.userName}}</div>
         <div>ID: {{customise.id}}</div>
 
         <div class="btn-group">

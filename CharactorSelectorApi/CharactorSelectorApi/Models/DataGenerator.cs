@@ -16,25 +16,13 @@ namespace CharactorSelectorApi.Models
 
             if (context.Characters.Any() && context.Options.Any()) return;
 
-            var characterId1 = Guid.NewGuid();
-            var characterId2 = Guid.NewGuid();
-            var characterId3 = Guid.NewGuid();
-            var characterId4 = Guid.NewGuid();
-            var characterId5 = Guid.NewGuid();
 
+            #region Panda
+
+            var characterId1 = Guid.NewGuid();
             var optionId1 = Guid.NewGuid();
             var optionId2 = Guid.NewGuid();
             var optionId3 = Guid.NewGuid();
-            var optionId4 = Guid.NewGuid();
-            var optionId5 = Guid.NewGuid();
-            var optionId6 = Guid.NewGuid();
-            var optionId7 = Guid.NewGuid();
-            var optionId8 = Guid.NewGuid();
-            var optionId9 = Guid.NewGuid();
-            var optionId10 = Guid.NewGuid();
-            var optionId11 = Guid.NewGuid();
-            var optionId12 = Guid.NewGuid();
-
             var panda = new Character
             {
                 Id = characterId1,
@@ -76,6 +64,20 @@ namespace CharactorSelectorApi.Models
                 Type = (int) OptionType.General
             };
 
+            #endregion
+
+            #region Develop
+
+            var characterId2 = Guid.NewGuid();
+            var optionId4 = Guid.NewGuid();
+            var optionId5 = Guid.NewGuid();
+            var optionId6 = Guid.NewGuid();
+            var optionId7 = Guid.NewGuid();
+            var optionId8 = Guid.NewGuid();
+            var optionId9 = Guid.NewGuid();
+            var optionId10 = Guid.NewGuid();
+            var optionId11 = Guid.NewGuid();
+            var optionId12 = Guid.NewGuid();
             var developer = new Character
             {
                 Id = characterId2,
@@ -83,7 +85,6 @@ namespace CharactorSelectorApi.Models
                 Description = "This is lovely developer.",
                 Type = (int) CharacterType.General
             };
-
             var DevOption1 = new Option
             {
                 Id = optionId4,
@@ -94,7 +95,6 @@ namespace CharactorSelectorApi.Models
                 ParentOptionId = null,
                 Type = (int) OptionType.General
             };
-
             var DevSubOption1 = new Option
             {
                 Id = optionId5,
@@ -105,7 +105,6 @@ namespace CharactorSelectorApi.Models
                 ParentOptionId = DevOption1.Id,
                 Type = (int) OptionType.General
             };
-
             var DevOption2 = new Option
             {
                 Id = optionId6,
@@ -116,7 +115,6 @@ namespace CharactorSelectorApi.Models
                 ParentOptionId = null,
                 Type = (int) OptionType.General
             };
-
             var DevSubOption2 = new Option
             {
                 Id = optionId7,
@@ -127,7 +125,6 @@ namespace CharactorSelectorApi.Models
                 ParentOptionId = DevOption2.Id,
                 Type = (int) OptionType.General
             };
-
             var DevSubOption3 = new Option
             {
                 Id = optionId8,
@@ -138,7 +135,6 @@ namespace CharactorSelectorApi.Models
                 ParentOptionId = DevOption2.Id,
                 Type = (int) OptionType.General
             };
-
             var DevSubOption4 = new Option
             {
                 Id = optionId9,
@@ -149,7 +145,6 @@ namespace CharactorSelectorApi.Models
                 ParentOptionId = DevOption2.Id,
                 Type = (int) OptionType.General
             };
-
             var DevOption3 = new Option
             {
                 Id = optionId10,
@@ -160,7 +155,6 @@ namespace CharactorSelectorApi.Models
                 ParentOptionId = null,
                 Type = (int) OptionType.General
             };
-
             var DevSubOption5 = new Option
             {
                 Id = optionId11,
@@ -171,7 +165,6 @@ namespace CharactorSelectorApi.Models
                 ParentOptionId = DevOption3.Id,
                 Type = (int) OptionType.General
             };
-
             var DevSubOption6 = new Option
             {
                 Id = optionId12,
@@ -183,9 +176,92 @@ namespace CharactorSelectorApi.Models
                 Type = (int) OptionType.General
             };
 
+            #endregion
+
+            #region Ninja
+
+            var characterId3 = Guid.NewGuid();
+            var optionId13 = Guid.NewGuid();
+            var optionId14 = Guid.NewGuid();
+            var optionId15 = Guid.NewGuid();
+            var optionId16 = Guid.NewGuid();
+            var optionId17 = Guid.NewGuid();
+            var optionId18 = Guid.NewGuid();
+
+            var ninja = new Character
+            {
+                Id = characterId3,
+                Name = "Ninja",
+                Description = "This is Ninja from Japan.",
+                Type = (int) CharacterType.General
+            };
+            var ninjaOption1 = new Option
+            {
+                Id = optionId13,
+                Character = ninja,
+                CharacterId = ninja.Id,
+                Description = "their armour",
+                Name = "Ninja-Yoroi",
+                ParentOptionId = null,
+                Type = (int) OptionType.General
+            };
+            var ninjaSubOption1 = new Option
+            {
+                Id = optionId14,
+                Character = ninja,
+                CharacterId = ninja.Id,
+                Description = "Yoyoi colour",
+                Name = "Red",
+                ParentOptionId = ninjaOption1.Id,
+                Type = (int) OptionType.General
+            };
+            var ninjaOption2 = new Option
+            {
+                Id = optionId15,
+                Character = ninja,
+                CharacterId = ninja.Id,
+                Description = "Weapons for ninja",
+                Name = "Weapons",
+                ParentOptionId = null,
+                Type = (int) OptionType.General
+            };
+            var ninjaSubOption2 = new Option
+            {
+                Id = optionId16,
+                Character = ninja,
+                CharacterId = ninja.Id,
+                Description = "Weapons Option: 手裏剣",
+                Name = "Shuriken",
+                ParentOptionId = ninjaOption2.Id,
+                Type = (int) OptionType.General
+            };
+            var ninjaOption3 = new Option
+            {
+                Id = optionId17,
+                Character = ninja,
+                CharacterId = ninja.Id,
+                Description = "Mask Option",
+                Name = "Mask",
+                ParentOptionId = null,
+                Type = (int) OptionType.General
+            };
+            var ninjaSubOption3 = new Option
+            {
+                Id = optionId18,
+                Character = ninja,
+                CharacterId = ninja.Id,
+                Description = "Ninja ware a mask.",
+                Name = "Mask On",
+                ParentOptionId = ninjaOption3.Id,
+                Type = (int) OptionType.General
+            };
+
+            #endregion
+            
             context.Characters.AddRange(
                 panda,
-                developer
+                developer,
+                ninja
             );
 
             context.Options.AddRange(
@@ -200,7 +276,13 @@ namespace CharactorSelectorApi.Models
                 DevSubOption3,
                 DevSubOption4,
                 DevSubOption5,
-                DevSubOption6
+                DevSubOption6,
+                ninjaOption1,
+                ninjaOption2,
+                ninjaOption3,
+                ninjaSubOption1,
+                ninjaSubOption2,
+                ninjaSubOption3
             );
 
             context.SaveChanges();

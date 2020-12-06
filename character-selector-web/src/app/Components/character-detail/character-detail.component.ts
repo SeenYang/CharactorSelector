@@ -40,6 +40,7 @@ export class CharacterDetailComponent implements OnInit {
         this.customiseCharacter = {
             characterId: this.characterId,
             userId: guid(),
+            userName: `FakeUser-${new Date().getMilliseconds()}`,
             selectedOptions: []
         } as Customise;
     }
