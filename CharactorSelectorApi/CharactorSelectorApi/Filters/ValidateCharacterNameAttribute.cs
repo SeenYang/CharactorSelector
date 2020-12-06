@@ -15,7 +15,7 @@ namespace CharactorSelectorApi.Filters
     {
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
-            if (context.ModelState.IsValid) return;
+            // if (context.ModelState.IsValid) return;
 
             var exception = new FieldValidationException();
 

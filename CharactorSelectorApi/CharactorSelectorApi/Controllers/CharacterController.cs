@@ -80,7 +80,6 @@ namespace CharactorSelectorApi.Controllers
         /// <returns code="400">Modal validation fail or creation fail.</returns>
         /// <returns code="500">All other internal error.</returns>
         [HttpPost("CreateCharacter")]
-        [ValidateCharacter]
         [ProducesResponseType(typeof(int), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(typeof(CharacterDto), StatusCodes.Status200OK)]
