@@ -1,3 +1,96 @@
+# Introduction:
+This is a simple web app for user to select one of the provided character and customise their version.
+There are three pages:
+1. Dashboard: list available character(s) and saved user customise character(s).
+2. Character detail page: for user customise the character.
+3. Customise detail page: show details of customise character created by users.
+
+There's also a REST-ful Web API for exposing more information. i.e. adding new character, update character, and create/update options of character.
+
+## For running the project:
+1. checkout the repo, or un-compress the zip file.
+2. use terminal or IDE to open projects.
+3. For BE, run:
+```
+dotnet restore
+dotnet run --project=CharactorSelectorApi 
+-- Then go to https://localhost:5001/ 
+```
+4. For FE, run:
+```
+npm install
+ng serve
+-- Then go to http://localhost:4200/
+```
+
+There also a demo video:
+
+## Design:
+BE project is a .net core 3.1 web api with ef core in-memory db for poc purpose. 
+FE is pure Angular FE using web api to communicate with BE.
+
+Both of them could be deployed separately to dockerized management environment, i.e. esc. sample dockerfiles have provided.
+
+### Assumption:
+1. Every character could only contain two levels of options for now. i.e. Option `Colour` could contain sub-options like `Red`.
+2. Data model design already consider unlimited levels of options. Only need to handle this structure in FE.
+```json
+{
+  "character": {
+    "options": [
+      {
+        "optionId": 1,
+        "parentOptionId": null,
+        "subOptions": [      
+          {
+            "optionId": 2,
+            "parentOptionId": 1,
+            "subOptions": [
+              {
+                "optionId": 3,
+                "parentOptionId": 2,
+                "subOptions": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+3. User could create customise character and save to db. Customise object design shows below.
+This design handle one case that, user created based on old character model. when character updated, 
+   they could just load the design, and update based on new character cuz we only store what they selected.
+```json
+{
+  "customiseDto": {
+    "id": 1,
+    "userId": "fake_user_id",
+    "characterId": "character_id",
+    "selectedOptions": [
+      "option_id_1",
+      "option_id_2",
+      "option_id_3"
+    ]
+  }
+}
+```
+
+## Todo-list:
+- [x] Back-end design and first implementation. 2020-12-05
+- [x] Back-end test. 2020-12-05
+- [x] Front-end scaffolding. 2020-12-05
+- [x] Hook up Back-end and Front-end. 2020-12-06
+- [x] Front-end UI Kit apply. 2020-12-05
+- [x] Final test and clean up. 2020-12-06
+- [x] Documentation. 2020-12-06
+
+## Plan to do:
+- [ ] Update existing user customise character.
+- [ ] DB access lock inquiry. (EF already well handled. could be done in architecture level.)
+- [ ] FE UI component test.
+------------------------------------------------------------------------------------------------
 # Expectations:
 * The code well written, structured, etc
 * The code deployable and portable, probably as a docker service
@@ -50,20 +143,3 @@ creating new characters and customisations.
 Please do mention roughly how much time you took to complete the task. Once you are done, 
 please send the code files, the deployment files, etc in zip format with instructions on how 
 to run it and anything to watch out for or configure.
-
-------------------------------------------------------------------------------------------------
-TODO:
-- [x] Back-end design and first implementation. 2020-12-05
-- [x] Back-end test. 2020-12-05
-- [x] Front-end scaffolding. 2020-12-05
-- [x] Hook up Back-end and Front-end. 2020-12-06
-- [x] Front-end UI Kit apply. 2020-12-05
-- [x] Final test and clean up. 2020-12-06
-- [x] Documentation. 2020-12-06
-- [ ] Front-end Test
-
-Plan to do:
-- [ ] DB access lock inquiry;
-
-
-

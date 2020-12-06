@@ -5,7 +5,7 @@ import {EMPTY, Observable, of} from 'rxjs';
 import {catchError, mapTo, tap} from 'rxjs/operators';
 import {Character} from '../Models/character';
 import {environment as testEnv} from '../../environments/environment';
-import {Customise} from "../Models/customise";
+import {Customise} from '../Models/customise';
 
 @Injectable({providedIn: 'root'})
 export class CharacterService {
