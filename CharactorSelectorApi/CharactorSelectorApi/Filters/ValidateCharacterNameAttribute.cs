@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 namespace CharactorSelectorApi.Filters
 {
     /// <summary>
-    /// Here is the sample filter that could do overriding modal validation, authorization/authentication validation, etc.
+    ///     Here is the sample filter that could do overriding modal validation, authorization/authentication validation, etc.
     /// </summary>
     public class ValidateCharacterAttribute : Attribute, IAsyncActionFilter
     {
@@ -29,6 +29,7 @@ namespace CharactorSelectorApi.Filters
                         : context.ModelState[key].Errors.FirstOrDefault()?.ErrorMessage;
                 exception.FieldValidationMessages.Add(errorMessage);
             }
+
             throw exception;
         }
     }

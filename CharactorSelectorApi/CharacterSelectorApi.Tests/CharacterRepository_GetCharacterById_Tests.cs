@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using AutoMapper;
 using CharactorSelectorApi.Models;
 using CharactorSelectorApi.Models.Entities;
 using CharactorSelectorApi.Repository;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Logging;
 using MockQueryable.Moq;
 using Moq;
@@ -59,7 +56,7 @@ namespace CharacterSelectorApi.Tests
             Assert.Equal(characterId, result.Id);
             Assert.Empty(result.Options);
         }
-        
+
         [Fact(DisplayName = "Get Character by Id, include options, return character and options")]
         public async void Test2()
         {
@@ -81,12 +78,11 @@ namespace CharacterSelectorApi.Tests
             }.AsQueryable().BuildMockDbSet();
             _context.Setup(m => m.Options).Returns(optionList.Object);
 
-            var result = await _repo.GetCharacterById(characterId, true);
+            var result = await _repo.GetCharacterById(characterId);
 
             Assert.NotNull(result);
             Assert.Equal(characterId, result.Id);
             Assert.NotEmpty(result.Options);
         }
     }
-
 }

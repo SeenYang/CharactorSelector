@@ -5,15 +5,12 @@ using CharactorSelectorApi.Models.Dtos;
 
 namespace CharactorSelectorApi.Services
 {
-    public interface ICharacterServices
+    public interface ICharacterService
     {
         // Character
         Task<List<CharacterDto>> GetAllCharacters();
         Task<CharacterDto> GetCharacterById(Guid characterId);
         Task<CharacterDto> CreateCharacter(CharacterDto newCharacter);
-        Task<CustomiseCharacterDto> CreateCustomerCharacter(CustomiseCharacterDto newCustomise);
-        Task<CustomiseCharacterDto> GetCustomiseById(Guid customiseId);
-        Task<List<CustomiseCharacterDto>> GetAllCustomises();
 
         // Options
         Task<List<OptionDto>> GetOptionsByCharacterId(Guid characterId);

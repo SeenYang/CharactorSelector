@@ -5,14 +5,13 @@ COPY nuget.config .
 COPY . ./app
 
 #Set workdir to the project folder (so all the commands from now on will automatically run inside the workdir folder)
-WORKDIR /app/CharacterSelectorApi
+WORKDIR /app/CharactorSelectorApi
 RUN dotnet restore --ignore-failed-sources
 
 WORKDIR /app
-# todo: enable once test made up.
-#RUN dotnet test
+RUN dotnet test
 
-WORKDIR /app/CharacterSelectorApi
+WORKDIR /app/CharactorSelectorApi
 RUN dotnet publish -c Release -o ../out --no-restore
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS runtime
@@ -20,4 +19,4 @@ ENV ASPNETCORE_URLS="http://*:80"
 WORKDIR /app
 COPY --from=build /app/out .
 EXPOSE 80
-ENTRYPOINT ["dotnet", "CharacterSelectorApi.dll"]
+ENTRYPOINT ["dotnet", "CharactorSelectorApi.dll"]

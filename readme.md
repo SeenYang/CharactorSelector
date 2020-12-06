@@ -54,12 +54,13 @@ to run it and anything to watch out for or configure.
 ------------------------------------------------------------------------------------------------
 TODO:
 - [x] Back-end design and first implementation. 2020-12-05
-- [x] Back-end test. 2020-12-06
-- [x] Front-end scarffolding. 2020-12-06
+- [x] Back-end test. 2020-12-05
+- [x] Front-end scaffolding. 2020-12-05
 - [x] Hook up Back-end and Front-end. 2020-12-06
-- [x] Front-end UI Kit apply. 2020-12-06
-- [x] Final test and clean up.
-- [ ] Documentation.
+- [x] Front-end UI Kit apply. 2020-12-05
+- [x] Final test and clean up. 2020-12-06
+- [x] Documentation. 2020-12-06
+- [ ] Front-end Test
 
 Plan to do:
 - [ ] DB access lock inquiry;

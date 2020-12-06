@@ -34,7 +34,7 @@ namespace CharactorSelectorApi.Models
 
             modelBuilder.Entity<CustomiseCharacter>()
                 .HasKey(u => u.Id);
-            
+
             modelBuilder.Entity<CustomiseOption>()
                 .HasKey(u => new {u.CustomiseId, u.OptionId});
 

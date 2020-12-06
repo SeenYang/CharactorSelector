@@ -6,12 +6,12 @@ using Microsoft.Extensions.Logging;
 
 namespace CharactorSelectorApi.Services
 {
-    public class UserServices : IUserServices
+    public class UserService : IUserService
     {
-        private readonly ILogger<UserServices> _logger;
+        private readonly ILogger<UserService> _logger;
         private readonly IUserRepository _repo;
 
-        public UserServices(ILogger<UserServices> logger, IUserRepository repo)
+        public UserService(ILogger<UserService> logger, IUserRepository repo)
         {
             _logger = logger;
             _repo = repo;

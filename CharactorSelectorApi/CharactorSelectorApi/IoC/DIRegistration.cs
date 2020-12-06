@@ -11,8 +11,8 @@ namespace CharactorSelectorApi.IoC
         {
             services.AddScoped<ICharacterRepository, CharacterRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<ICharacterServices, CharacterServices>();
-            services.AddScoped<IUserServices, UserServices>();
+            services.AddScoped<ICharacterService, CharacterService>();
+            services.AddScoped<IUserService, UserService>();
         }
     }
 }

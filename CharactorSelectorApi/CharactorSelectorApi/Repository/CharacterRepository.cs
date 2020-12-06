@@ -25,6 +25,7 @@ namespace CharactorSelectorApi.Repository
         }
 
         /// <summary>
+        ///     Get All Characters
         ///     This method won't return characters' options
         /// </summary>
         /// <returns></returns>
@@ -36,6 +37,7 @@ namespace CharactorSelectorApi.Repository
         }
 
         /// <summary>
+        ///     Get Character by Id.
         ///     This method will return whole structure of the character's options
         /// </summary>
         /// <returns></returns>
@@ -62,14 +64,18 @@ namespace CharactorSelectorApi.Repository
             return result;
         }
 
+        /// <summary>
+        ///     Create Character.
+        ///     * Only Character table, option table will be inserted by another method.
+        ///     * Character ID will be assigned by DB, and populated to options in caller.
+        /// </summary>
+        /// <param name="newCharacter"></param>
+        /// <returns></returns>
         public async Task<CharacterDto> CreateCharacter(CharacterDto newCharacter)
         {
             try
             {
                 var entity = _map.Map<CharacterDto, Character>(newCharacter);
-
-                // todo: Ask for lock release
-
                 var created = await _context.Characters.AddAsync(entity);
                 await _context.SaveChangesAsync();
                 var result = _map.Map<Character, CharacterDto>(created.Entity);
@@ -77,13 +83,17 @@ namespace CharactorSelectorApi.Repository
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
                 _logger.LogError($"Fail to create new character. Exception: {e}");
+                throw new Exception("Fail to create new character.");
             }
-
-            return null;
         }
 
+        /// <summary>
+        ///     Update Character
+        /// </summary>
+        /// <param name="character"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public async Task<CharacterDto> UpdateCharacter(CharacterDto character)
         {
             try
@@ -98,13 +108,16 @@ namespace CharactorSelectorApi.Repository
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
                 _logger.LogError($"Fail to update character {character.Id}. Exception: {e}");
+                throw new Exception("Fail to update character {character.Id}.");
             }
-
-            return null;
         }
 
+        /// <summary>
+        ///     Get Option(s) By CharacterId
+        /// </summary>
+        /// <param name="characterId"></param>
+        /// <returns></returns>
         public async Task<List<OptionDto>> GetOptionsByCharacterId(Guid characterId)
         {
             var entities = await _context.Options.Where(o => o.CharacterId == characterId).ToListAsync();
@@ -114,24 +127,12 @@ namespace CharactorSelectorApi.Repository
             return topOptions.Select(option => BuildOptionDto(option.Id, entities)).ToList();
         }
 
-        private OptionDto BuildOptionDto(Guid Id, List<Option> options)
-        {
-            var currentOption = options.FirstOrDefault(o => o.Id == Id);
-            if (currentOption == null) throw new Exception($"Can not find option {Id} from provided list.");
-
-            var dto = _map.Map<Option, OptionDto>(currentOption);
-            // TODO: Turn on automapper initialise dest when null.
-            dto.SubOptions = new List<OptionDto>();
-            var subOptions = options.Where(o => o.ParentOptionId == Id).ToList();
-
-            if (subOptions.Any())
-                foreach (var subOption in subOptions)
-                    dto.SubOptions.Add(BuildOptionDto(subOption.Id, options));
-
-            return dto;
-        }
-
-        public async Task<bool> CreateOptions(List<OptionDto> newOptions)
+        /// <summary>
+        ///     Create Option
+        /// </summary>
+        /// <param name="newOptions"></param>
+        /// <returns></returns>
+        public async Task<bool> CreateOption(List<OptionDto> newOptions)
         {
             try
             {
@@ -152,6 +153,10 @@ namespace CharactorSelectorApi.Repository
             }
         }
 
+        /// <summary>
+        /// </summary>
+        /// <param name="option"></param>
+        /// <returns></returns>
         public async Task<OptionDto> UpdateOption(OptionDto option)
         {
             try
@@ -172,6 +177,11 @@ namespace CharactorSelectorApi.Repository
             return null;
         }
 
+        /// <summary>
+        ///     Get Customise By Id
+        /// </summary>
+        /// <param name="CustomiseId"></param>
+        /// <returns></returns>
         public async Task<CustomiseCharacterDto> GetCustomiseById(Guid CustomiseId)
         {
             var entity = await _context.Customises.FirstOrDefaultAsync(c => c.Id == CustomiseId);
@@ -185,6 +195,10 @@ namespace CharactorSelectorApi.Repository
             return result;
         }
 
+        /// <summary>
+        ///     Get All Customise
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<CustomiseCharacterDto>> GetAllCustomise()
         {
             var entities = await _context.Customises.ToListAsync();
@@ -193,7 +207,8 @@ namespace CharactorSelectorApi.Repository
         }
 
         /// <summary>
-        /// 
+        ///     This is method for creating new customise character
+        ///     Please provide IDs for character due to hierarchy need to be retained.
         /// </summary>
         /// <param name="newCustomise"></param>
         /// <returns></returns>
@@ -224,11 +239,26 @@ namespace CharactorSelectorApi.Repository
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
                 _logger.LogError($"Fail to create new customise character. Exception: {e}");
+                throw new Exception("Fail to create new customise character.");
             }
+        }
 
-            return null;
+        private OptionDto BuildOptionDto(Guid Id, List<Option> options)
+        {
+            var currentOption = options.FirstOrDefault(o => o.Id == Id);
+            if (currentOption == null) throw new Exception($"Can not find option {Id} from provided list.");
+
+            var dto = _map.Map<Option, OptionDto>(currentOption);
+            // TODO: Turn on automapper initialise dest when null.
+            dto.SubOptions = new List<OptionDto>();
+            var subOptions = options.Where(o => o.ParentOptionId == Id).ToList();
+
+            if (subOptions.Any())
+                foreach (var subOption in subOptions)
+                    dto.SubOptions.Add(BuildOptionDto(subOption.Id, options));
+
+            return dto;
         }
     }
 }

@@ -13,11 +13,11 @@ namespace CharactorSelectorApi.Controllers
     public class UserController : ControllerBase
     {
         private readonly ILogger<UserController> _logger;
-        private readonly IUserServices _services;
+        private readonly IUserService _service;
 
-        public UserController(IUserServices services, ILogger<UserController> logger)
+        public UserController(IUserService service, ILogger<UserController> logger)
         {
-            _services = services;
+            _service = service;
             _logger = logger;
         }
 
@@ -30,7 +30,7 @@ namespace CharactorSelectorApi.Controllers
                 return BadRequest("Invalid input userId.");
             }
 
-            var result = await _services.GetUserById(userId);
+            var result = await _service.GetUserById(userId);
             return result != null ? (IActionResult) Ok(result) : NoContent();
         }
 
@@ -47,7 +47,7 @@ namespace CharactorSelectorApi.Controllers
             }
 
             newUser.Id = Guid.Empty;
-            var result = await _services.CreateUser(newUser);
+            var result = await _service.CreateUser(newUser);
             return result != null ? (IActionResult) Ok(result) : BadRequest("Fail to create user.");
         }
     }

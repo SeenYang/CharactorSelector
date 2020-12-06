@@ -16,9 +16,9 @@ namespace CharactorSelectorApi.Repository
 
         // Options
         Task<List<OptionDto>> GetOptionsByCharacterId(Guid characterId);
-        Task<bool> CreateOptions(List<OptionDto> newOptions);
+        Task<bool> CreateOption(List<OptionDto> newOptions);
         Task<OptionDto> UpdateOption(OptionDto option);
-        
+
         // Customise
         Task<CustomiseCharacterDto> GetCustomiseById(Guid CustomiseId);
         Task<List<CustomiseCharacterDto>> GetAllCustomise();
