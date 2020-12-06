@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CharactorSelectorApi.Models.Dtos;
 using CharactorSelectorApi.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -14,6 +16,12 @@ namespace CharactorSelectorApi.Controllers
     {
         private readonly ILogger<CustomiseController> _logger;
         private readonly ICustomiseService _service;
+
+        public CustomiseController(ILogger<CustomiseController> logger, ICustomiseService service)
+        {
+            _logger = logger;
+            _service = service;
+        }
 
         /// <summary>
         ///     This is the endpoint for adding customise character.
@@ -45,7 +53,21 @@ namespace CharactorSelectorApi.Controllers
             return result != null ? (IActionResult) Ok(result) : NotFound();
         }
 
+        /// <summary>
+        /// This is endpoint for getting All customise character.
+        /// </summary>
+        /// <remarks>
+        /// ***Please aware the return payload won't contain the selected options.***
+        /// 
+        /// If need selected options, please take the id to use GetCustomiseById.
+        /// </remarks>
+        /// <returns code="200" cerf="CustomiseCharacterDto">Success response</returns>
+        /// <returns code="404">Fail to fetch character or not found.</returns>
+        /// <returns code="500">All other error.</returns>
         [HttpGet("GetAllCustomise")]
+        [ProducesResponseType(typeof(int), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(CustomiseCharacterDto), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllCustomise()
         {
             var result = await _service.GetAllCustomises();

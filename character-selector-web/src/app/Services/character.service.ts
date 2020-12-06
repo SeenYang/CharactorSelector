@@ -10,6 +10,7 @@ import {Customise} from '../Models/customise';
 @Injectable({providedIn: 'root'})
 export class CharacterService {
     private CharacterUrl = `${testEnv.apiPath}/api/Characters`;  // URL to web api
+    private CustomiseUrl = `${testEnv.apiPath}/api/Customises`;  // URL to web api
 
     httpOptions = {
         headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -29,7 +30,7 @@ export class CharacterService {
     }
 
     getAllCustomises(): Observable<Customise[]> {
-        return this.http.get<Customise[]>(`${this.CharacterUrl}/GetAllCustomise/`)
+        return this.http.get<Customise[]>(`${this.CustomiseUrl}/GetAllCustomise/`)
             .pipe(
                 tap(_ => this.log('Fetch Characters')),
                 catchError(this.handleError<Customise[]>('getAllCustomise', []))
@@ -37,7 +38,7 @@ export class CharacterService {
     }
 
     getCustomiseById(customiseId: string): Observable<Customise> {
-        return this.http.get<Customise>(`${this.CharacterUrl}/GetCustomiseById/${customiseId}`).pipe(
+        return this.http.get<Customise>(`${this.CustomiseUrl}/GetCustomiseById/${customiseId}`).pipe(
             tap((x) => {
                 this.log(`found Customise matching "${customiseId}"`);
             }),
@@ -61,7 +62,7 @@ export class CharacterService {
     }
 
     addCustomerCharacter(customise: Customise): Observable<Character> {
-        return this.http.post<Character>(`${this.CharacterUrl}/CreateCustomerCharacter/`, customise).pipe(
+        return this.http.post<Character>(`${this.CustomiseUrl}/CreateCustomerCharacter/`, customise).pipe(
             tap((newCharacter: Character) => {
                 console.log(`added new Customise Character. w/ id=${newCharacter.id}`);
                 return newCharacter;

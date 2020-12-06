@@ -7,7 +7,6 @@ import {MessageService} from '../../Services/message.service';
 import {CharacterService} from '../../Services/character.service';
 import {Character} from '../../Models/character';
 import {Customise} from '../../Models/customise';
-import {Observable, of} from "rxjs";
 
 @Component({
     selector: 'app-character-detail',
