@@ -140,9 +140,9 @@ namespace CharactorSelectorApi.Repository
                 var entities = _map.Map<List<OptionDto>, List<Option>>(newOptions);
                 // todo: Ask for lock release
                 await _context.Options.AddRangeAsync(entities);
-                _context.Options.FromSqlRaw("SET IDENTITY_INSERT dbo.Employees ON");
+                _context.Options.FromSqlRaw("SET IDENTITY_INSERT dbo.Option ON");
                 await _context.SaveChangesAsync();
-                _context.Options.FromSqlRaw("SET IDENTITY_INSERT dbo.Employees OFF");
+                _context.Options.FromSqlRaw("SET IDENTITY_INSERT dbo.Option OFF");
                 return true;
             }
             catch (Exception e)
